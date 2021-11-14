@@ -1,0 +1,21 @@
+interface ClientServer<T> { 
+ void serve(ServerClient<T> caller);
+}
+interface ServerClient<T> {
+T support();
+}
+class Server<T> implements ClientServer<T> { 
+ public void serve(ServerClient<T> caller) {
+  T additionalInfo = caller.support();
+ } 
+}
+class Client<T> implements ServerClient<T> {
+ ...
+ public T support() { … }
+ ...
+ {
+ ...
+ (new Server<T>()).serve(this);
+ ...
+ }
+}
